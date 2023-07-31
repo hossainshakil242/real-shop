@@ -5,10 +5,10 @@ const Header = () => {
     return (
         <div>
             <div className="navbar bg-base-300">
-                <a className="btn btn-ghost normal-case text-xl">realShop</a>
-                <Link className='ml-5 ' to='/'>Home</Link>
-                <Link className='ml-5 ' to='/login'>Login</Link>
-                <Link className='ml-5 ' to='/register'>Register</Link>
+                <a className="btn btn-ghost normal-case text-xl">Real_Shop</a>
+                <Link className='btn btn-ghost normal-case text-xl' to='/'>Home</Link>
+                <Link className='btn btn-ghost normal-case text-xl' to='/login'>Login</Link>
+                <Link className='btn btn-ghost normal-case text-xl' to='/register'>Register</Link>
             </div>
         </div>
     );

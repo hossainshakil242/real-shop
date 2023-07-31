@@ -1,13 +1,18 @@
-import React from 'react';
+import { Result } from 'postcss';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Register = () => {
+    const{user} = useContext(AuthContext);
+    console.log(user);
 
-    const handleRegister = (e)=>{
+    const handleRegister = (e) => {
         e.preventDefault();
-        const form = e.targe;
+        const form = e.target;
         const email = form.email.value;
-        const password= form.passwod.value;
-        console.log(email,password);
+        const password = form.password.value;
+        console.log(email, password);
     }
     return (
         <div>
@@ -29,14 +34,16 @@ const Register = () => {
                                     <span className="label-text">Password</span>
                                 </label>
                                 <input type="password" name='password' placeholder="password" className="input input-bordered" required />
-                                <label className="label">
-                                    <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-                                </label>
                             </div>
                             <div className="form-control mt-6">
                                 <button className="btn btn-primary">Register</button>
                             </div>
+
+                            <div className=" text-center">
+                                <Link to='/login'><a href="#">Already Have an Account?</a></Link>
+                            </div>
                         </form>
+
                     </div>
                 </div>
             </div>

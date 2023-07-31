@@ -4,15 +4,25 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Register = () => {
-    const{user} = useContext(AuthContext);
-    console.log(user);
+    const{user,createUser} = useContext(AuthContext);
+    // console.log(createUser);
 
     const handleRegister = (e) => {
         e.preventDefault();
         const form = e.target;
+        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        console.log(name,email, password);
+
+        createUser(email,password)
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+        })
+        .catch(error=>{
+            console.log(error.message);
+        })
     }
     return (
         <div>
@@ -25,9 +35,15 @@ const Register = () => {
                         <form onSubmit={handleRegister} className="card-body">
                             <div className="form-control">
                                 <label className="label">
+                                    <span className="label-text">Full Name</span>
+                                </label>
+                                <input type="text" name='name' placeholder="jhon smith" className="input input-bordered" required />
+                            </div>
+                            <div className="form-control">
+                                <label className="label">
                                     <span className="label-text">Email</span>
                                 </label>
-                                <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                                <input type="email" name='email' placeholder="jhon@gmail.com" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">

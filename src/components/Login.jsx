@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+
+const loginSuccess = () => toast.success('Login Successfully.');
 
 const Login = () => {
-    const [error,setError] = useState('');
+    const [error, setError] = useState('');
 
-    const { signIn,logOut } = useContext(AuthContext);
-    
+    const { signIn, logOut } = useContext(AuthContext);
+
     const handleLogin = (e) => {
         e.preventDefault();
         setError('');
@@ -19,24 +22,24 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                if(!loggedUser.emailVerified){
+                if (!loggedUser.emailVerified) {
                     alert('please verify your email');
                     logOut()
-                    .then(()=>{})
-                    .catch(error=>{console.log(error);})
+                        .then(() => { })
+                        .catch(error => { console.log(error); })
 
                 }
-                if(loggedUser.emailVerified){
+                if (loggedUser.emailVerified) {
                     form.reset();
-                setError('login successfull')
+                    loginSuccess();
                 }
             })
             .catch(error => {
                 const wrongPassword = `Firebase: Error (auth/wrong-password).`
-                if(error.message === wrongPassword){
+                if (error.message === wrongPassword) {
                     setError('wrong password')
                 }
-                else{
+                else {
                     console.log(error.message);
                 }
             })
@@ -79,6 +82,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };

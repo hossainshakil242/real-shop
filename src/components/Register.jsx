@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Register = () => {
-    const{user,createUser} = useContext(AuthContext);
+    const{user,createUser,sendVerificationEmail} = useContext(AuthContext);
     // console.log(createUser);
 
     const handleRegister = (e) => {
@@ -19,11 +19,22 @@ const Register = () => {
         .then(result =>{
             const loggedUser = result.user;
             console.log(loggedUser);
+
+            sendVerificationEmail(result.user)
+            .then(result=>{
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                alert('Check your email');
+            })
+            .catch(error=>{
+                console.log(error);
+            })
         })
         .catch(error=>{
             console.log(error.message);
         })
     }
+
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">

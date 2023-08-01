@@ -5,7 +5,7 @@ import { AuthContext } from '../provider/AuthProvider';
 const Login = () => {
     const [error,setError] = useState('');
 
-    const { signIn } = useContext(AuthContext);
+    const { signIn,logOut } = useContext(AuthContext);
     
     const handleLogin = (e) => {
         e.preventDefault();
@@ -19,7 +19,17 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                form.reset();
+                if(!loggedUser.emailVerified){
+                    alert('please verify your email');
+                    logOut()
+                    .then(()=>{})
+                    .catch(error=>{console.log(error);})
+
+                }
+                if(loggedUser.emailVerified){
+                    form.reset();
+                setError('login successfull')
+                }
             })
             .catch(error => {
                 const wrongPassword = `Firebase: Error (auth/wrong-password).`

@@ -18,7 +18,7 @@ const Header = () => {
     return (
         <div>
             <div className="navbar bg-base-300">
-                <a className="btn btn-ghost normal-case text-xl">Real_Shop</a>
+                <Link className="btn btn-ghost normal-case text-xl">Real_Shop</Link>
                 <Link className='btn btn-ghost normal-case text-xl' to='/'>Home</Link>
                 {
                     user &&
@@ -26,10 +26,11 @@ const Header = () => {
                 }
                 <Link className='btn btn-ghost normal-case text-xl' to='/register'>Register</Link>
                 {
-                    !user ?
-                        <Link className='btn btn-ghost normal-case text-xl' to='/login'>Login</Link> :
-                        <Link onClick={handlerLogOut} className='btn btn-ghost normal-case text-xl' to='/login'>LogOut</Link>
+                    user ?
+                    <Link onClick={handlerLogOut} className='btn btn-ghost normal-case text-xl'>LogOut</Link> :
+                    <Link className='btn btn-ghost normal-case text-xl' to='/login'>Login</Link> 
                 }
+                <Link to='/order'>Order</Link>
             </div>
         </div>
     );

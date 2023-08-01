@@ -1,12 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
+    const [error,setError] = useState('');
 
+    const { signIn } = useContext(AuthContext);
+    
     const handleLogin = (e) => {
         e.preventDefault();
+        setError('');
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
@@ -16,9 +19,16 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                form.reset();
             })
             .catch(error => {
-                console.log(error.message);
+                const wrongPassword = `Firebase: Error (auth/wrong-password).`
+                if(error.message === wrongPassword){
+                    setError('wrong password')
+                }
+                else{
+                    console.log(error.message);
+                }
             })
     }
     return (
@@ -53,6 +63,9 @@ const Login = () => {
                                 <Link to='/register'><a href="#">Create new account</a></Link>
                             </div>
                         </form>
+                        <div>
+                            <p className='text-error text-center'>{error}</p>
+                        </div>
                     </div>
                 </div>
             </div>

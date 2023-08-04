@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
+import { FaGoogle, FaGithub } from 'react-icons/fa';
 
 const emailVerificationAlert = () => toast('Please verification your email.');
 const emailAlreadyUsed = () => toast('This Email Already Used.');
@@ -78,9 +79,9 @@ const Register = () => {
                         <h1 className="text-3xl text-center pb-5 font-bold">Easy SignUp</h1>
                         <div className='space-x-2'>
 
-                            <button onClick={handleWithGoogle} className=" btn btn-outline btn-primary">Login With Google</button>
+                            <button onClick={handleWithGoogle} className=" btn btn-outline btn-primary"><FaGoogle></FaGoogle> Login With Google</button>
 
-                            <button onClick={handleWithGithub} className=" btn btn-outline btn-primary">Login With Github</button>
+                            <button onClick={handleWithGithub} className=" btn btn-outline btn-primary"><FaGithub></FaGithub> Login With Github</button>
 
                         </div>
                     </div>

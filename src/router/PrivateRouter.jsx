@@ -6,7 +6,7 @@ const PrivateRouter = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
 
     if (loading) {
-        return <div className='mx-auto'> <progress className="progress progress-warning w-56"></progress>
+        return <div className='text-center'> <progress className="progress progress-warning w-56"></progress>
         </div>
 
     }

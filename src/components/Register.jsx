@@ -8,14 +8,22 @@ const emailVerificationAlert = () => toast('Please verification your email.');
 const emailAlreadyUsed = () => toast('This Email Already Used.');
 
 const Register = () => {
-    const { user, createUser, sendVerificationEmail, createAccoutnWithGoole, logOut } = useContext(AuthContext);
+    const { user, createUser, sendVerificationEmail, createAccoutnWithGoole, createAccountWithGithub, logOut } = useContext(AuthContext);
     // console.log(createUser);
 
     const handleWithGoogle = () => {
         createAccoutnWithGoole()
             .then(result => {
-                const WithGoogleLogged = result.user;
-                console.log(WithGoogleLogged);
+                const withGoogleLogged = result.user;
+                console.log(withGoogleLogged);
+            })
+    }
+
+    const handleWithGithub = () => {
+        createAccountWithGithub()
+            .then(result => {
+                const withGithubLogged = result.user;
+                console.log(withGithubLogged);
             })
     }
 
@@ -72,7 +80,7 @@ const Register = () => {
 
                             <button onClick={handleWithGoogle} className=" btn btn-outline btn-primary">Login With Google</button>
 
-                            <button className=" btn btn-outline btn-primary">Login With Github</button>
+                            <button onClick={handleWithGithub} className=" btn btn-outline btn-primary">Login With Github</button>
 
                         </div>
                     </div>

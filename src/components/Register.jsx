@@ -8,7 +8,7 @@ const emailVerificationAlert = () => toast('Please verification your email.');
 const emailAlreadyUsed = () => toast('This Email Already Used.');
 
 const Register = () => {
-    const{user,createUser,sendVerificationEmail} = useContext(AuthContext);
+    const{user,createUser,sendVerificationEmail,logOut} = useContext(AuthContext);
     // console.log(createUser);
 
     const handleRegister = (e) => {
@@ -28,7 +28,16 @@ const Register = () => {
             .then(result=>{
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                // emailVerificationAlert();
+                if(!loggedUser.emailVerified){
+                    logOut()
+                    .then(()=>{
+                        console.log('logout');
+                    })
+                    .then(error=>{
+                        console.log(error);
+                    })
+                }
+                form.reset();
             })
             .catch(error=>{
                 console.log(error);

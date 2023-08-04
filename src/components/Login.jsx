@@ -33,15 +33,7 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                if (!loggedUser.emailVerified) {
-                    alert('please verify your email');
-                    emailVerificationAlert();
-
-                    logOut()
-                        .then(() => { })
-                        .catch(error => { console.log(error); })
-
-                }
+                
                 if (loggedUser.emailVerified) {
                     form.reset();
                     loginSuccess();

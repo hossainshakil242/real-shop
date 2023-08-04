@@ -21,8 +21,8 @@ const AuthProvider = ({ children }) => {
     }
 
     // Send verify email
-    const sendVerificationEmail = (user)=>{
-        return sendEmailVerification (user) ;
+    const sendVerificationEmail = (user) => {
+        return sendEmailVerification(user);
     }
 
     // logOut
@@ -36,6 +36,16 @@ const AuthProvider = ({ children }) => {
             console.log(currentUser);
             setUser(currentUser);
             setLoading(false);
+            // if not verified email then automatically wil be logout
+            if (!currentUser.emailVerified) {
+                logOut()
+                    .then(result => {
+                        console.log(result);
+                    })
+                    .then(error => {
+                        console.log(error.message);
+                    })
+            }
         });
 
         return () => {

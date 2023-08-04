@@ -4,6 +4,17 @@ import { AuthContext } from '../provider/AuthProvider';
 import toast, { Toaster } from 'react-hot-toast';
 
 const loginSuccess = () => toast.success('Login Successfully.');
+const wrongPassword = () => toast.error('Sorry Your password was wrong.');
+const Alert = () => toast(
+    "User Not Found Right Now..!\n\n Please, Create a New Account",
+    {
+        duration: 6000,
+    }
+);
+
+const emailVerificationAlert = () => toast('Please verification your email !',
+    { duration: 5000, }
+)
 
 const Login = () => {
     const [error, setError] = useState('');
@@ -24,6 +35,8 @@ const Login = () => {
                 console.log(loggedUser);
                 if (!loggedUser.emailVerified) {
                     alert('please verify your email');
+                    emailVerificationAlert();
+
                     logOut()
                         .then(() => { })
                         .catch(error => { console.log(error); })
@@ -41,6 +54,8 @@ const Login = () => {
                 }
                 else {
                     console.log(error.message);
+                    setError(error.message);
+                    Alert();
                 }
             })
     }

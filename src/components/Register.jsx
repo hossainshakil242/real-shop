@@ -2,6 +2,10 @@ import { Result } from 'postcss';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
+import toast, { Toaster } from 'react-hot-toast';
+
+const emailVerificationAlert = () => toast('Please verification your email.');
+const emailAlreadyUsed = () => toast('This Email Already Used.');
 
 const Register = () => {
     const{user,createUser,sendVerificationEmail} = useContext(AuthContext);
@@ -24,14 +28,18 @@ const Register = () => {
             .then(result=>{
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                alert('Check your email');
+                // emailVerificationAlert();
             })
             .catch(error=>{
                 console.log(error);
+                emailVerificationAlert();
             })
         })
         .catch(error=>{
+            const alreadyUse = `Firebase: Error (auth/email-already-in-use).`;
+            error.message === alreadyUse  && emailAlreadyUsed();
             console.log(error.message);
+            
         })
     }
 
@@ -74,6 +82,7 @@ const Register = () => {
                     </div>
                 </div>
             </div>
+            <Toaster />
         </div>
     );
 };
